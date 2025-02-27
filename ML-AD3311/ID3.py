@@ -35,6 +35,5 @@ for col in new_sample.columns:
 prediction = model.predict(new_sample)
 predicted_label = label_encoders['PlayTennis'].inverse_transform(prediction)
 tree_rules = export_text(model, feature_names=X.columns.tolist())
-print("Predicted class for new sample:", predicted_label[0])
-print("Decision Tree Structure:\n")
 print(tree_rules)
+print("Predicted class for new sample:", predicted_label[0])
