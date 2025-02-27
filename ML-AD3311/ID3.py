@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.tree import export_text
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 data = pd.DataFrame([
@@ -33,4 +34,7 @@ for col in new_sample.columns:
     new_sample[col] = label_encoders[col].transform(new_sample[col])
 prediction = model.predict(new_sample)
 predicted_label = label_encoders['PlayTennis'].inverse_transform(prediction)
+tree_rules = export_text(model, feature_names=X.columns.tolist())
 print("Predicted class for new sample:", predicted_label[0])
+print("Decision Tree Structure:\n")
+print(tree_rules)
