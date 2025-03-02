@@ -1,14 +1,10 @@
-# Import the numpy library for matrix operations
 import numpy as np
-# numpy (np) is a library that makes math operations (like multiplication of matrices) fast and easy.
-# We use it for all calculations in the neural network.
 
 # Sigmoid activation function
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 # This function takes any number (x) and squashes it between 0 and 1.
 # Example: sigmoid(-10) ≈ 0, sigmoid(0) = 0.5, sigmoid(10) ≈ 1.
-# We use it to make the network's predictions smooth and interpretable.
 
 # Derivative of sigmoid (used in backpropagation)
 def sigmoid_derivative(x):
@@ -17,21 +13,18 @@ def sigmoid_derivative(x):
 # It’s used during backpropagation to figure out how much to adjust weights.
 # Example: if x = 0.5, then sigmoid_derivative(0.5) = 0.5 * (1 - 0.5) = 0.25.
 
-# Our dataset
 X = np.array([[2, 3],  # Hours Studied, Hours Slept
               [4, 5],
               [1, 2],
               [6, 7]])
-# X is the input data: each row is one example, each column is a feature.
 # Here, we have 4 examples with 2 features: Hours Studied and Hours Slept.
-# Shape of X is (4, 2) meaning 4 rows, 2 columns.
+# Shape of X is (4, 2) 
 
 y = np.array([[0],     # Pass (0 = fail, 1 = pass)
               [1],
               [0],
               [1]])
 # y is the target output: what we want the network to predict.
-# 0 means "fail," 1 means "pass." Each row corresponds to a row in X.
 # Shape of y is (4, 1).
 
 # Initialize weights and biases randomly
@@ -42,7 +35,6 @@ np.random.seed(1)  # For reproducibility
 input_size = 2     # 2 inputs
 hidden_size = 2    # 2 hidden neurons
 output_size = 1    # 1 output
-# These define the structure of the network:
 # - 2 inputs (Hours Studied, Hours Slept).
 # - 2 neurons in the hidden layer (a middle step to process inputs).
 # - 1 output (Pass or Fail).
@@ -157,4 +149,3 @@ for i in range(len(X)):
     result = "Pass" if prediction >= 0.5 else "Fail"
     # If prediction ≥ 0.5, call it "Pass"; otherwise, "Fail".
     print(f"Hours Studied: {hours_studied}, Hours Slept: {hours_slept} -> Prediction: {prediction:.4f} -> {result}")
-# Print the inputs, predicted value (rounded to 4 decimals), and Pass/Fail result.
