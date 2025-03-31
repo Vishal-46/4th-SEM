@@ -90,7 +90,7 @@ def get_accuracy(test_set, predictions):
     return (correct/float(len(test_set))) * 100.0
 
 def main():
-    filename = 'C:\\python\\prima.csv'
+    filename = 'D:\Lab EXPs'
     split_ratio = 0.67
     dataset = load_csv(filename)
     training_set, test_set = split_dataset(dataset, split_ratio)
