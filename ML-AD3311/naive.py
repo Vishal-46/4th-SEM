@@ -66,7 +66,7 @@ def calculate_class_probabilities(summaries, input_vector):
             probabilities[class_value] *= calculate_probability(x, mean, stdev)
     return probabilities
 
-def predict(summaries, input_vector):
+def predict(summaries, input_vector): #Picks the class with the highest probability for a given input.
     probabilities = calculate_class_probabilities(summaries, input_vector)
     best_label, best_prob = None, -1
     for class_value, probability in probabilities.items():
@@ -75,14 +75,14 @@ def predict(summaries, input_vector):
             best_label = class_value
     return best_label
 
-def get_predictions(summaries, test_set):
+def get_predictions(summaries, test_set):#Makes predictions for all rows in the test set.
     predictions = []
     for i in range(len(test_set)):
         result = predict(summaries, test_set[i])
         predictions.append(result)
     return predictions
 
-def get_accuracy(test_set, predictions):
+def get_accuracy(test_set, predictions):#Calculates the percentage of correct predictions.
     correct = 0
     for i in range(len(test_set)):
         if test_set[i][-1] == predictions[i]:
