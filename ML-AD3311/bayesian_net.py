@@ -17,20 +17,27 @@ def test_model(df, x, y, testData, trained_data):
     total = len(df[y.name])
     totalYes = trained_data["totalYes"]
     totalNo = trained_data["totalNo"]
-    sum1Yes = (totalYes/total)
+
+    sum1Yes = totalYes / total
     sum2Yes = 1
     for indx2 in range(len(testData)):
-        sum1Yes *= (trained_data[x.columns[indx2]][testData[indx2]]['yes']/totalYes)
-        sum2Yes *= (trained_data[x.columns[indx2]][testData[indx2]]['total']/total)
-    sumYes = sum1Yes/sum2Yes
-    sum1No = (totalNo/total)
+        feature = x.columns[indx2]
+        value = testData[indx2]
+        sum1Yes *= (trained_data[feature][value]['yes'] / totalYes)
+        sum2Yes *= (trained_data[feature][value]['total'] / total)
+    sumYes = sum1Yes / sum2Yes
+
+    sum1No = totalNo / total
     sum2No = 1
     for indx2 in range(len(testData)):
-        sum1No *= (trained_data[x.columns[indx2]][testData[indx2]]['no']/totalNo)
-        sum2No *= (trained_data[x.columns[indx2]][testData[indx2]]['total']/total)
-    sumNo = sum1No/sum2No
-    print(f"\nProbability of Covid 19 to be True : {format(sumYes,'.2f')}")
-    print(f"Probability of Covid 19 to be False : {format(sumNo,'.2f')}")
+        feature = x.columns[indx2]
+        value = testData[indx2]
+        sum1No *= (trained_data[feature][value]['no'] / totalNo)
+        sum2No *= (trained_data[feature][value]['total'] / total)
+    sumNo = sum1No / sum2No
+
+    print(f"\nProbability of Covid 19 to be True : {format(sumYes, '.2f')}")
+    print(f"Probability of Covid 19 to be False : {format(sumNo, '.2f')}")
     if sumYes > sumNo:
         ans = "Yes"
     else:
@@ -53,13 +60,18 @@ def load_model():
     print("Loaded!\n")
     return js
 
+# Main Program
 df = pd.DataFrame(read_data())
 x, y = pre_processing(df)
-x = x.truncate(0, 4433)
-y = y.truncate(0, 4433)
+
+# Use .iloc instead of truncate
+x = x.iloc[:4434]
+y = y.iloc[:4434]
+
 trained_data = load_model()
+
 while True:
-    print("\nEnter you choice of features:\n")
+    print("\nEnter your choice of features:\n")
     test = []
     for uniqueCol in list(x.columns):
         columnData = list(np.unique(df[uniqueCol]))
