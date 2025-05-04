@@ -2,8 +2,6 @@ import pandas as pd
 import json
 import time
 from io import StringIO
-
-# Small sample dataset as a string (can be extended)
 csv_data = """
 Breathing_Problem,Fever,Dry_Cough,Sore_Throat,Running_Nose,Asthma,Chronic_Lung_Disease,Headache,Heart_Disease,Diabetes,Hyper_Tension,Infection_Prob
 1,1,1,0,0,0,0,1,0,1,1,Yes
