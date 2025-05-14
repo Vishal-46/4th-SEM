@@ -90,7 +90,7 @@ def get_accuracy(test_set, predictions):#Calculates the percentage of correct pr
     return (correct/float(len(test_set))) * 100.0
 
 def main():
-    filename = 'D:\Lab EXPs\diabetes.csv'
+    filename = 'D:\lab\diabetes.csv'
     split_ratio = 0.67
     dataset = load_csv(filename)
     training_set, test_set = split_dataset(dataset, split_ratio)
