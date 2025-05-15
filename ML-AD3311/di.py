@@ -13,5 +13,7 @@ values = []
 for i in range(n):
     val = input(f"Enter value {i+1}: ")
     values.append(val)
-rotated = [values[-1]] + values[:-1]
-print("Values after rotation:", rotated)
+k = int(input("Enter number of steps to circulate: "))
+rotated = values[-k:] + values[:-k]
+print("Values after circulation:", rotated)
+
