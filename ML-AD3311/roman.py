@@ -4,16 +4,9 @@ class IntegerToRoman:
 
     def to_roman(self):
         val = [
-            1000, 900, 500, 400,
-            100, 90, 50, 40,
-            10, 9, 5, 4,
-            1
+            1000, 900, 500, 400,100, 90, 50, 40,10, 9, 5, 4,1
         ]
-        syms = [
-            "M", "CM", "D", "CD",
-            "C", "XC", "L", "XL",
-            "X", "IX", "V", "IV",
-            "I"
+        syms = ["M", "CM", "D", "CD","C", "XC", "L", "XL","X", "IX", "V", "IV","I"
         ]
         num = self.number
         roman_num = ''
