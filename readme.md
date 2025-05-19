@@ -119,3 +119,92 @@ print("CRC Remainder:", remainder)
 transmitted_data = data + remainder
 print("Transmitted Data:", transmitted_data)
 ```
+----
+```python
+#3
+import java.net.*;
+import java.io.*;
+
+public class Server {
+    public static final int PORT = 4000;
+
+    public static void main(String[] args) {
+        ServerSocket sersock = null;
+        Socket sock = null;
+
+        try {
+            sersock = new ServerSocket(PORT);
+            System.out.println("Server Started: " + sersock);
+
+            try {
+                sock = sersock.accept();
+                System.out.println("Client Connected: " + sock);
+
+                DataInputStream ins = new DataInputStream(sock.getInputStream());
+                System.out.println(ins.readLine());
+
+                PrintStream ios = new PrintStream(sock.getOutputStream());
+                ios.println("Hello from server");
+
+                ios.close();
+                ins.close();
+                sock.close();
+            } catch (SocketException se) {
+                System.out.println("Server Socket problem: " + se.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.out.println("Couldn't start: " + e.getMessage());
+        }
+
+        if (sock != null) {
+            System.out.println("Connection from: " + sock.getInetAddress());
+        }
+    }
+}
+
+
+import java.io.*;
+import java.net.*;
+
+class Client {
+    public static void main(String[] args) {
+        Socket sock = null;
+        DataInputStream dis = null;
+        PrintStream ps = null;
+
+        System.out.println("Trying to connect...");
+
+        try {
+            // Connect to localhost at port 4000 (Server.PORT)
+            sock = new Socket(InetAddress.getLocalHost(), Server.PORT);
+
+            // Send a message to the server
+            ps = new PrintStream(sock.getOutputStream());
+            ps.println("Hi from client");
+
+            // Read the response from the server
+            DataInputStream is = new DataInputStream(sock.getInputStream());
+            System.out.println(is.readLine());
+
+            // Close input stream
+            is.close();
+
+        } catch (SocketException e) {
+            System.out.println("SocketException: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IOException: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (sock != null) sock.close();
+            } catch (IOException ie) {
+                System.out.println("Close Error: " + ie.getMessage());
+            }
+        }
+    }
+}
+
+```
+----
+
